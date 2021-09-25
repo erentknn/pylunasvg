@@ -1,1 +1,1 @@
-# pylunasvg
+# pylunasvg - Python bindings for lunasvg
