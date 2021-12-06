@@ -114,10 +114,11 @@ setup(
     url="https://github.com/erentknn/pylunasvg",
     description="Bindings for lunasvg",
     long_description="",
-    ext_modules=[CMakeExtension("pylunasvg")],
+    ext_modules=[CMakeExtension("pylunasvg/pylunasvg")],
     cmdclass={"build_ext": CMakeBuild},
     packages=["pylunasvg"],
-    package_data={"pylunasvg":["__init__.pyi"]},
+    package_data={"": ["pylunasvg.pyi"]},
+    entry_points={"console_scripts": ["pylunasvg = pylunasvg.__main__:main"]},
     zip_safe=False,
     classifiers=[
         "Operating System :: POSIX :: Linux",

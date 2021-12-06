@@ -4,8 +4,8 @@ import typing
 __all__ = [
     "Bitmap",
     "Box",
-    "Document",
     "Matrix"
+    "Document",
 ]
 
 
@@ -30,6 +30,12 @@ class Box():
     def __init__(self) -> None: ...
     @typing.overload
     def __init__(self, x: float, y: float, w: float, h: float) -> None: ...
+    pass
+class Matrix():
+    @typing.overload
+    def __init__(self) -> None: ...
+    @typing.overload
+    def __init__(self, a: float, b: float, c: float, d: float, e: float, f: float) -> None: ...
     pass
 class Document():
     def box(self) -> Box: 
@@ -69,7 +75,7 @@ class Document():
         """
         Returns the current transformation matrix of the document
         """
-    def render(self, bitmap: Bitmap, matrix: Matrix = ..., backgroundColor: int = 0) -> None: 
+    def render(self, bitmap: Bitmap, matrix: Matrix = Matrix(), backgroundColor: int = 0) -> None: 
         """
         Renders the document to a bitmap
         """
@@ -106,10 +112,4 @@ class Document():
         """
         Returns width of the document
         """
-    pass
-class Matrix():
-    @typing.overload
-    def __init__(self) -> None: ...
-    @typing.overload
-    def __init__(self, a: float, b: float, c: float, d: float, e: float, f: float) -> None: ...
     pass

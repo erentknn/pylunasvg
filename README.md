@@ -20,9 +20,17 @@ svgArray = np.array(bitmap, copy=False)
 # Do something useful
 ```
 
+## Convert SVG to PNG
+
+To convert an SVG file to PNG (Unless otherwise specified, output is saved to same directory as SVG file), use the following command:
+
+```bash
+pylunasvg --svg FSL_Micelle.svg
+```
+
 ## Install
 
-```
+```Python
 pip install pylunasvg
 ```
 
@@ -30,6 +38,4 @@ pip install pylunasvg
 
 1-) Clone this repo with `--recursive` flag. This is needed because project uses lunasvg and pybind11 as git submodules.
 
-2-) Go to the repo directory. If you are on windows and dont have cmake installed, you have to install it. If you have Visual Studio loaded in your computer open x64 Native Tools Command Prompt that Visual Studio provides.
-
-3-) Run `pip install .` inside repo directory. (Make sure you are on the right conda environment.) This command will build lunasvg and then build pylunasvg. After this is over you can try the example above. If you get any errors, please submit an issue.
+2-) Run `pip install .` inside repo directory. (Make sure you are on the right conda environment.) This command will build lunasvg and then build pylunasvg. After this is over you can try the example above. If you get any errors, please submit an issue.
