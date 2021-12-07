@@ -1,6 +1,8 @@
 # pylunasvg - Python bindings for lunasvg
 
 [![Build](https://github.com/erentknn/pylunasvg/actions/workflows/build_wheels.yml/badge.svg)](https://github.com/erentknn/pylunasvg/actions/workflows/build_wheels.yml)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/pylunasvg.svg)](https://pypi.org/project/pylunasvg/)
+
 
 Pylunasvg is a simple wrapper around [lunasvg](https://github.com/sammycage/lunasvg) that uses [pybind11](https://github.com/pybind/pybind11) to create python bindings. All public API of the lunasvg is available in Python.
 
