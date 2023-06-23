@@ -108,7 +108,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name="pylunasvg",
-    version="0.0.2",
+    version="0.0.3",
     author="Eren Tekin",
     author_email="erntkn4@gmail.com",
     url="https://github.com/erentknn/pylunasvg",
