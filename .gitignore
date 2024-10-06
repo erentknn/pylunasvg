@@ -130,3 +130,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/cmake-build-release/
+/cmake-build-debug/
