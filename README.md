@@ -16,9 +16,9 @@ import numpy as np
 
 document = pl.Document.loadFromFile("FSL_Micelle.svg")
 bitmap = document.renderToBitmap()
+bitmap.convertToRGBA()
 
-svgArray = np.array(bitmap, copy=False)
-
+arr = np.array(bitmap, copy=False)
 # Do something useful
 ```
 
@@ -28,6 +28,8 @@ To convert an SVG file to PNG (Unless otherwise specified, output is saved to sa
 
 ```bash
 pylunasvg --svg FSL_Micelle.svg
+pylunasvg --svg in.svg -W 512 -H 512       # explicit output size
+pylunasvg --svg in.svg -s 2.0 -o out.png   # 2x scale, custom output path
 ```
 
 ## Install
