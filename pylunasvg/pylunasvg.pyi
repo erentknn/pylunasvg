@@ -42,9 +42,6 @@ class Bitmap:
     @typing.overload
     def writeToPng(self, filename: str) -> bool:
         ...
-    @typing.overload
-    def writeToPng(self, callback: ..., closure: typing_extensions.CapsuleType) -> bool:
-        ...
 class Box:
     @typing.overload
     def __init__(self) -> None:

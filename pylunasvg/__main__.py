@@ -5,9 +5,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description="Convert SVG to PNG")
-    parser.add_argument(
-        "--svg", default=None, help="SVG file to convert", required=True
-    )
+    parser.add_argument("svg", help="SVG file to convert")
     parser.add_argument(
         "-W", "--width", default=None, type=int, help="Width of output"
     )

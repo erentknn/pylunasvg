@@ -56,16 +56,15 @@ PYBIND11_MODULE(pylunasvg, m)
 		.def("isNull", &Bitmap::isNull)
 		.def("valid", &Bitmap::valid)
 		.def("writeToPng", py::overload_cast<const std::string&>(&Bitmap::writeToPng, py::const_), py::arg("filename"))
-		.def("writeToPng", py::overload_cast<lunasvg_write_func_t, void*>(&Bitmap::writeToPng, py::const_), py::arg("callback"), py::arg("closure"))
-		  .def_buffer([](Bitmap& b) -> py::buffer_info {
-			return py::buffer_info(
-				b.data(),
-				sizeof(uint8_t),
-				py::format_descriptor<uint8_t>::format(),
-				3,
-				{ (size_t)b.height(), (size_t)b.width(), (size_t)4 },
-				{ (size_t)b.stride(), (size_t)4, (size_t)1 }
-			);
+		.def_buffer([](Bitmap& b) -> py::buffer_info {
+		return py::buffer_info(
+			b.data(),
+			sizeof(uint8_t),
+			py::format_descriptor<uint8_t>::format(),
+			3,
+			{ (size_t)b.height(), (size_t)b.width(), (size_t)4 },
+			{ (size_t)b.stride(), (size_t)4, (size_t)1 }
+		);
 		});
 
 	py::class_<Box>(m, "Box")
