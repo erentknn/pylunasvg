@@ -6,6 +6,11 @@ import sys
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
+# Read the README for the PyPI long description.
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
+
 # Convert distutils Windows platform specifiers to CMake -A arguments
 PLAT_TO_CMAKE = {
     "win32": "Win32",
@@ -108,12 +113,13 @@ class CMakeBuild(build_ext):
 
 setup(
     name="pylunasvg",
-    version="0.1.0",
+    version="0.1.1",
     author="Eren Tekin",
     author_email="erntkn4@gmail.com",
     url="https://github.com/erentknn/pylunasvg",
     description="Bindings for lunasvg",
-    long_description="",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     ext_modules=[CMakeExtension("pylunasvg/pylunasvg")],
     cmdclass={"build_ext": CMakeBuild},
     packages=["pylunasvg"],
