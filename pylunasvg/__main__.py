@@ -1,21 +1,20 @@
-from . import svg2png
-
 import argparse
+
+from . import svg2png
 
 
 def main():
     parser = argparse.ArgumentParser(description="Convert SVG to PNG")
     parser.add_argument("svg", help="SVG file to convert")
-    parser.add_argument(
-        "-W", "--width", default=None, type=int, help="Width of output"
-    )
-    parser.add_argument(
-        "-H", "--height", default=None, type=int, help="Height of output"
-    )
+    parser.add_argument("-W", "--width", default=None, type=int, help="Width of output")
+    parser.add_argument("-H", "--height", default=None, type=int, help="Height of output")
     parser.add_argument("-s", "--scale", default=1.0, type=float, help="Scale of output")
 
     parser.add_argument(
-        "-o", "--output", default=None, help="Output file name, default is input name with .png.",
+        "-o",
+        "--output",
+        default=None,
+        help="Output file name, default is input name with .png.",
     )
 
     args = parser.parse_args()

@@ -132,3 +132,6 @@ dmypy.json
 .pyre/
 /cmake-build-release/
 /cmake-build-debug/
+
+# macOS
+.DS_Store

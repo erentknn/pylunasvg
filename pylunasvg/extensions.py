@@ -1,5 +1,6 @@
-from .pylunasvg import Document
 from urllib import request
+
+from .pylunasvg import Document
 
 
 def loadFromUrl(url: str) -> Document:

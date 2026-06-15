@@ -1,24 +1,35 @@
 import os
-import numpy as np
-from PIL import Image
+from typing import Optional
+
+from .extensions import loadFromUrl
 from .pylunasvg import (
     Bitmap,
     Box,
+    Document,
+    Element,
     Matrix,
     Node,
     TextNode,
-    Element,
-    Document,
+    lunasvg_add_font_face_from_data,
+    lunasvg_add_font_face_from_file,
     lunasvg_version,
     lunasvg_version_string,
-    lunasvg_add_font_face_from_file,
-    lunasvg_add_font_face_from_data,
 )
-from .extensions import loadFromUrl
+
 
 def svg2png(
-    svg_file: str, width: int = None, height: int = None, scale: float = 1.0, output_file: str = None
+    svg_file: str,
+    width: Optional[int] = None,
+    height: Optional[int] = None,
+    scale: float = 1.0,
+    output_file: Optional[str] = None,
 ):
+    try:
+        import numpy as np
+        from PIL import Image
+    except ImportError as e:
+        raise ImportError("svg2png() requires numpy and Pillow. Install them with: pip install pylunasvg[png]") from e
+
     doc = Document.loadFromFile(svg_file)
     w = width if width is not None else doc.width()
     h = height if height is not None else doc.height()
@@ -30,7 +41,7 @@ def svg2png(
             "the SVG has no intrinsic size, so pass explicit width/height."
         )
     bitmap = doc.renderToBitmap(render_w, render_h)
-    bitmap.convertToRGBA() # inplace
+    bitmap.convertToRGBA()  # inplace
     svgArray = np.array(bitmap, copy=False)
     out = output_file or (os.path.splitext(svg_file)[0] + ".png")
     Image.fromarray(svgArray).save(out, format="png")

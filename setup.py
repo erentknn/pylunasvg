@@ -3,13 +3,8 @@ import re
 import subprocess
 import sys
 
-from setuptools import setup, Extension
+from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext
-
-# Read the README for the PyPI long description.
-this_directory = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
-    long_description = f.read()
 
 # Convert distutils Windows platform specifiers to CMake -A arguments
 PLAT_TO_CMAKE = {
@@ -67,7 +62,6 @@ class CMakeBuild(build_ext):
                     pass
 
         else:
-
             # Single config generators are handled "normally"
             single_config = any(x in cmake_generator for x in {"NMake", "Ninja"})
 
@@ -82,9 +76,7 @@ class CMakeBuild(build_ext):
 
             # Multi-config generators have a different way to specify configs
             if not single_config:
-                cmake_args += [
-                    "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)
-                ]
+                cmake_args += ["-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)]
                 build_args += ["--config", cfg]
 
         if sys.platform.startswith("darwin"):
@@ -103,41 +95,14 @@ class CMakeBuild(build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
-        subprocess.check_call(
-            ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp
-        )
-        subprocess.check_call(
-            ["cmake", "--build", "."] + build_args, cwd=self.build_temp
-        )
+        subprocess.check_call(["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp)
+        subprocess.check_call(["cmake", "--build", "."] + build_args, cwd=self.build_temp)
 
 
 setup(
-    name="pylunasvg",
-    version="0.1.2",
-    author="Eren Tekin",
-    author_email="erntkn4@gmail.com",
-    url="https://github.com/erentknn/pylunasvg",
-    description="Bindings for lunasvg",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
     ext_modules=[CMakeExtension("pylunasvg/pylunasvg")],
     cmdclass={"build_ext": CMakeBuild},
     packages=["pylunasvg"],
     package_data={"": ["pylunasvg.pyi"]},
-    entry_points={"console_scripts": ["pylunasvg = pylunasvg.__main__:main"]},
     zip_safe=False,
-    classifiers=[
-        "Operating System :: POSIX :: Linux",
-        "Operating System :: Microsoft :: Windows",
-        "Operating System :: MacOS :: MacOS X",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.14",
-    ],
 )
