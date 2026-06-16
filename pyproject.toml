@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pylunasvg"
-version = "0.1.2"
+version = "0.2.0"
 description = "Bindings for lunasvg"
 readme = "README.md"
 requires-python = ">=3.9"
