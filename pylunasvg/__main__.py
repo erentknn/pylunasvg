@@ -1,6 +1,7 @@
 import argparse
+import sys
 
-from . import svg2png
+from . import PylunasvgError, svg2png
 
 
 def main():
@@ -19,13 +20,17 @@ def main():
 
     args = parser.parse_args()
 
-    svg2png(
-        svg_file=args.svg,
-        width=args.width,
-        height=args.height,
-        scale=args.scale,
-        output_file=args.output,
-    )
+    try:
+        svg2png(
+            svg_file=args.svg,
+            width=args.width,
+            height=args.height,
+            scale=args.scale,
+            output_file=args.output,
+        )
+    except (PylunasvgError, ImportError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
